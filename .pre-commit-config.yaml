@@ -1,0 +1,12 @@
+repos:
+# only works for kubernetes secrets
+- repo: https://github.com/onedr0p/sops-pre-commit
+  rev: v2.1.0
+  hooks:
+  - id: forbid-secrets
+- repo: https://github.com/voldy/validate-sops
+  rev: 'v0.1.1'  # Use the latest commit SHA or tag
+  hooks:
+  - id: validate-sops
+    # Adjust based on your file(s) location and type(s)
+    files: '.+\.sops\.(ya?ml|json|env)$'

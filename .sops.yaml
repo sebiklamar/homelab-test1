@@ -1,0 +1,7 @@
+---
+creation_rules:
+  - age: 'age1247uvu7q0r842e78xxk5zt0yz0luh90zvsvzdzxdt6ql8xt76ygszj8eq9'
+    path_regex: (kubernetes|talos|clusters)/.*\.sops\.ya?ml
+    encrypted_regex: "((?i)(^trusted|^secrets|^trustdinfo|^cluster|.[pP]assword|crt|key|^data$|^stringData))"
+  # - age: 'age1247uvu7q0r842e78xxk5zt0yz0luh90zvsvzdzxdt6ql8xt76ygszj8eq9'
+  #   encrypted_comment_regex: "sops:encrypt"
