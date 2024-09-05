@@ -1,0 +1,47 @@
+version: "2.1"
+services:
+  endlessh:
+    image: lscr.io/linuxserver/endlessh:latest
+    container_name: endlessh
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      #- MSDELAY=10000 #optional
+      - MSDELAY=7 #optional
+      - MAXLINES=32 #optional
+      - MAXCLIENTS=4096 #optional
+      - LOGFILE=false #optional
+      - BINDFAMILY= #optional
+    ports:
+      - 10022:2222
+    restart: unless-stopped
+  openssh-server:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: openssh-server
+    hostname: openssh-server #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PUBLIC_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMtsiX2u7WAVQ/x/P6m/VZbgwO4lr6qRgtzxhbCVaEX4 sebi@tabea #optional
+      - PUBLIC_KEY_FILE=/root/.ssh/authorized_keys #optional
+  #    - PUBLIC_KEY_DIR=/path/to/directory/containing/_only_/pubkeys #optional
+  #    - PUBLIC_KEY_URL=https://github.com/username.keys #optional
+  #    - SUDO_ACCESS=false #optional
+  #    - PASSWORD_ACCESS=false #optional
+  #    - USER_PASSWORD=password #optional
+  #    - USER_PASSWORD_FILE=/path/to/file #optional
+      - USER_NAME=sshgw #optional
+    volumes:
+      - /srv/docker-compose/hosts/openssh-server/config:/config
+    ports:
+      - 2222:2222
+    restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 10.7.4.250
+networks:
+  default:
+    external:
+      name: directnet

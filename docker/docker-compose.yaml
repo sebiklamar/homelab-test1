@@ -1,0 +1,92 @@
+# vim:sw=2:ts=2:expandtab:ai
+version: "3.1"
+services:
+
+  endlessh:
+    image: lscr.io/linuxserver/endlessh:latest
+    container_name: endlessh
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      #- MSDELAY=10000 #optional
+      - MSDELAY=7 #optional
+      - MAXLINES=32 #optional
+      - MAXCLIENTS=4096 #optional
+      - LOGFILE=false #optional
+      - BINDFAMILY= #optional
+    ports:
+      - 10022:2222
+    restart: unless-stopped
+
+  openssh-server:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: openssh-server
+    hostname: openssh-server #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PUBLIC_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMtsiX2u7WAVQ/x/P6m/VZbgwO4lr6qRgtzxhbCVaEX4 sebi@tabea #optional
+      - PUBLIC_KEY_FILE=/root/.ssh/authorized_keys #optional
+  #    - PUBLIC_KEY_DIR=/path/to/directory/containing/_only_/pubkeys #optional
+  #    - PUBLIC_KEY_URL=https://github.com/username.keys #optional
+  #    - SUDO_ACCESS=false #optional
+  #    - PASSWORD_ACCESS=false #optional
+  #    - USER_PASSWORD=password #optional
+  #    - USER_PASSWORD_FILE=/path/to/file #optional
+      - USER_NAME=sshgw #optional
+    volumes:
+      - /srv/docker-compose/hosts/openssh-server/config:/config
+    ports:
+      - 2222:2222
+    restart: unless-stopped
+
+  unifidb:
+    image: docker.io/mongo:7.0
+    container_name: unifidb
+    volumes:
+      - /srv/docker-compose/hosts/unifi-db/data/db:/data/db
+      - /srv/docker-compose/hosts/unifi-db/config/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    restart: unless-stopped
+    networks:
+      - backnet
+
+  unifi-network-application:
+    image: lscr.io/linuxserver/unifi-network-application:latest
+    container_name: unifi-network-application
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - MONGO_USER=unifiuser
+      - MONGO_PASS=unifipass
+      - MONGO_HOST=unifidb
+      - MONGO_PORT=27017
+      - MONGO_DBNAME=unifidb
+#      - MEM_LIMIT=1024 #optional
+#      - MEM_STARTUP=1024 #optional
+#      - MONGO_TLS= #optional
+#      - MONGO_AUTHSOURCE= #optional
+    volumes:
+      - /srv/docker-compose/hosts/unifi/data:/config
+    ports:
+      - 8443:8443
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080
+      - 1900:1900/udp #optional
+      - 8843:8843 #optional
+      - 8880:8880 #optional
+      - 6789:6789 #optional
+      - 5514:5514/udp #optional
+    restart: unless-stopped
+    networks:
+      - default
+      - backnet
+
+networks:
+  backnet:
+  default:
+    external:
+      name: directnet
