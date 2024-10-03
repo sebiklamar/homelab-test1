@@ -4,6 +4,9 @@
 # playground
 *.bak
 
+# Talos
+clusterconfig
+
 # TerraForm/ToFu
 .terraform
 *.tfstate

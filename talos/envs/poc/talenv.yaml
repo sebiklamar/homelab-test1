@@ -1,0 +1,19 @@
+kind: generic-yaml
+metadata:
+  name: talenv
+
+clusterName: talos1
+domainName: test.iseja.net
+# renovate: depName=ghcr.io/siderolabs/installer datasource=docker
+talosVersion: v1.7.7
+# renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
+kubernetesVersion: v1.30.3
+vip: 10.7.4.10
+controlPlaneIP_1: 10.7.4.81
+# ipAddress: fd33:9818:3f85:2a02:216:3eff:fe73:a5bb
+workerIP_1: 10.7.4.83
+# ipAddress: fd41:d3d2:3421:104:216:3eff:feb8:c909
+# ipAddress: fd33:9818:3f85:2a02:216:3eff:feb8:c909
+workerIP_2: 10.7.4.85
+# ipAddress: fd41:d3d2:3421:104:216:3eff:fe86:9af7
+# ipAddress: fd33:9818:3f85:2a02:216:3eff:fe86:9af7

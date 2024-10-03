@@ -1,0 +1,51 @@
+kind: generic-yaml
+metadata:
+  name: talconfig
+
+clusterName: ${clusterName}
+#endpoint: https://${clusterName}.${domainName}:6443
+talosVersion: ${talosVersion}
+kubernetesVersion: ${kubernetesVersion}
+# allowSchedulingOnMasters: true # this value sets allowSchedulingOnControlPlanes to true in the talos node config
+# additionalApiServerCertSans: &san
+#   - ${clusterName}.${domainName}
+# additionalMachineCertSans: *san
+
+patches:
+  # Kubespan
+  # URL: https://www.talos.dev/v1.7/talos-guides/network/kubespan/
+  - |-
+    machine:
+        network:
+          kubespan:
+            enabled: true
+
+controlPlane:
+  schematic:
+    customization:
+#      extraKernelArgs:
+#        - net.ifnames=1
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/qemu-guest-agent
+  # patches:
+    # # Enable KubePrism
+    # - |-
+    #   machine:
+    #     features:
+    #       kubePrism:
+    #         enabled: true
+    #         port: 7445
+    
+    # Kubelet configuration
+    # - |-
+    #   machine:
+    #     kubelet:
+    #       extraArgs:
+    #         rotate-server-certificates: "true"
+    #       extraConfig:
+    #         maxPods: 150
+    #       nodeIP:
+    #         validSubnets:
+    #             - 10.7.4.0/24
+    #             - fd41:d3d2:4321:42::/96
