@@ -13,13 +13,16 @@ variable "nodes" {
   }))
 }
 
-variable "gateway" {
-  description = "IPv4 Gateway for nodes"
-  type        = string
+variable "network" {
+  description = "node network configuration"
+  type = object({
+    gateway = string
+    vlan_id = optional(number, 0)
+    domain  = string
+  })
 }
 
-variable "vlan_id" {
-  description = "VLAN ID for nodes"
-  type        = number
-  default     = 0
+variable "name_prefix" {
+  description = "environment-specific prefix for e.g. hostnames (e.g. dev-, qa-)"
+  type        = string
 }

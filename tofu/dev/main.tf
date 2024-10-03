@@ -1,6 +1,7 @@
 module "vms" {
   source  = "./vms"
   nodes   = var.nodes
-  gateway = var.gateway
-  vlan_id = var.vlan_id
+  network = var.network
+
+  name_prefix = terraform.workspace == "default" ? "" : "${terraform.workspace}-"
 }

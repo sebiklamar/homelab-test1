@@ -3,18 +3,24 @@ resource "proxmox_virtual_environment_vm" "this" {
 
   node_name = each.value.host_node
 
-  name        = each.key
-  description = each.value.node_type == "controlplane" ? "Talos Control Plane" : "Talos Worker"
-  tags        = each.value.node_type == "controlplane" ? ["k8s", "control-plane"] : ["k8s", "worker"]
-  on_boot     = true
-  vm_id       = each.value.vm_id
+  # hostname is crafted by environment prefix and domain suffix, e.g. dev-host.example.com
+  name            = "${var.name_prefix}${each.key}.${var.network.domain}"
+  description     = each.value.node_type == "controlplane" ? "Talos Control Plane" : "Talos Worker"
+  tags            = each.value.node_type == "controlplane" ? ["k8s", "control-plane"] : ["k8s", "worker"]
+  vm_id           = each.value.vm_id
+  on_boot         = true
+  started         = true
+  stop_on_destroy = true
+  tablet_device   = false
 
-  machine       = "q35"
-  scsi_hardware = "virtio-scsi-single"
-  bios          = "seabios"
+  machine         = "q35"
+  scsi_hardware   = "virtio-scsi-single"
+  bios            = "seabios"
+  boot_order      = ["scsi0", "ide2"]
+  keyboard_layout = "de"
 
   agent {
-    enabled = true
+    enabled = false
   }
 
   cpu {
@@ -29,7 +35,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   network_device {
     bridge      = "vmbr0"
     mac_address = each.value.mac_address
-    vlan_id     = var.vlan_id
+    vlan_id     = var.network.vlan_id
   }
 
   disk {
@@ -44,8 +50,6 @@ resource "proxmox_virtual_environment_vm" "this" {
     # file_id      = proxmox_virtual_environment_download_file.this["${each.value.host_node}_${each.value.update == true ? local.update_image_id : local.image_id}"].id
   }
 
-  boot_order = ["scsi0"]
-
   operating_system {
     type = "l26" # Linux Kernel 2.6 - 6.X.
   }
@@ -55,8 +59,7 @@ resource "proxmox_virtual_environment_vm" "this" {
     ip_config {
       ipv4 {
         address = "${each.value.ip}/24"
-        # gateway = var.cluster.gateway
-        gateway = var.gateway
+        gateway = var.network.gateway
       }
     }
   }
