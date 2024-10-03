@@ -1,2 +1,26 @@
 # SOPS
 .decrypted~*
+
+# playground
+*.bak
+
+# TerraForm/ToFu
+.terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.lock.hcl
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Proxmox
+*.qcow2
+*.raw
+
+# Misc
+output
+*.cert
+*.key
