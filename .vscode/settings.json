@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "tofu/**/*.tf": "terraform",
+    "kubernetes/**/*.sops.toml": "plaintext"
+  },
+  "prettier.configPath": ".ci/prettier/.prettierrc.yaml",
+  "prettier.ignorePath": ".ci/prettier/.prettierignore"
+}
