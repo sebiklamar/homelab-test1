@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   machine         = "q35"
   scsi_hardware   = "virtio-scsi-single"
   bios            = "seabios"
-  boot_order      = ["scsi0", "ide2"]
+  boot_order      = ["scsi0", "ide3"]
   keyboard_layout = "de"
 
   agent {
@@ -26,8 +26,8 @@ resource "proxmox_virtual_environment_vm" "this" {
   cdrom {
     enabled   = true
     file_id   = "ISOs:iso/talos-nocloud-amd64.iso"
-    interface = "ide2"
-  }
+      }
+
   cpu {
     cores = each.value.cpu
     type  = "host"
