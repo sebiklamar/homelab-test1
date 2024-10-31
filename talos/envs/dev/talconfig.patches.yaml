@@ -1,0 +1,15 @@
+# IPv6, not working correctly
+# "k8s.NodeApplyController", "error": "1 error(s) occurred:\n\terror getting node: nodes \"test-talos-cp-01\" not found"}
+# "k8s.KubeletStaticPodController", "error": "error refreshing pod status: error fetching pod status: an error on the server (\"Authorization error (user=apiserver-kubelet-client, verb=get, resource=nodes, subresource=proxy)\") has prevented the request from succeeding"}
+- op: add
+  path: "/patches/-"
+  value: |-
+    cluster:
+      network:
+        podSubnets:
+          - 10.42.0.0/16
+          # - fd41:d3d2:4321:42::/96
+        serviceSubnets:
+          # - 10.96.0.0/12
+          - 10.43.0.0/16
+          # - fd41:d3d2:4321:43::/112

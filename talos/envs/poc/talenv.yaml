@@ -2,10 +2,10 @@ kind: generic-yaml
 metadata:
   name: talenv
 
-clusterName: talos1
+clusterName: poc-talos1
 domainName: test.iseja.net
 # renovate: depName=ghcr.io/siderolabs/installer datasource=docker
-talosVersion: v1.7.7
+talosVersion: v1.7.6
 # renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
 kubernetesVersion: v1.30.3
 vip: 10.7.4.10

@@ -1,0 +1,14 @@
+kind: generic-yaml
+metadata:
+  name: talenv
+
+clusterName: dev-iseja-homelab
+domainName: home.iseja.net
+# renovate: depName=ghcr.io/siderolabs/installer datasource=docker
+talosVersion: v1.8.0
+# renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
+# kubernetesVersion: v1.30.3
+vip: 10.7.8.30
+controlPlaneIP_1: 10.7.4.81
+workerIP_1: 10.7.4.83
+workerIP_2: 10.7.4.85

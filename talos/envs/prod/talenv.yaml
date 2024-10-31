@@ -1,0 +1,10 @@
+clusterName: talos2
+domainName: test.iseja.net
+# renovate: depName=ghcr.io/siderolabs/kubelet datasource=docker
+kubernetesVersion: v1.30.3
+vip: 10.7.4.10
+controlPlaneIP_1: 10.7.4.81
+controlPlaneIP_2: 10.7.4.152
+workerIP_1: 10.7.4.85
+workerIP_2: 10.7.4.162
+workerIP_3: 10.7.4.163

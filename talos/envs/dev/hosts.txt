@@ -1,0 +1,3 @@
+test-talos-cp-01.test.iseja.net
+test-talos-worker-01.test.iseja.net
+test-talos-worker-02.test.iseja.net

@@ -49,3 +49,10 @@ controlPlane:
     #         validSubnets:
     #             - 10.7.4.0/24
     #             - fd41:d3d2:4321:42::/96
+
+worker:
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/qemu-guest-agent
