@@ -1,3 +1,13 @@
+variable "proxmox" {
+  type = object({
+    endpoint     = string
+    insecure     = bool
+    username     = string
+    api_token    = string
+  })
+  sensitive = true
+}
+
 variable "cluster" {
   description = "talos k8s cluster configuration"
   type = object({
@@ -30,7 +40,7 @@ variable "network" {
   })
 }
 
-variable "name_prefix" {
+variable "env" {
   description = "environment-specific prefix for e.g. hostnames (e.g. dev-, qa-)"
   type        = string
 }
