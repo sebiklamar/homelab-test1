@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../tofu/dev/vms"
+  source = "../../../tofu/modules/vms"
 }
 
 include "root" {
