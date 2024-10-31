@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   node_name = each.value.host_node
 
   # hostname is crafted by environment prefix and domain suffix, e.g. dev-host.example.com
-  name            = "${var.env}${each.key}.${var.network.domain}"
+  name            = "${var.env}-${each.key}.${var.network.domain}"
   description     = each.value.node_type == "controlplane" ? "Talos Control Plane" : "Talos Worker"
   tags            = each.value.node_type == "controlplane" ? ["k8s", "control-plane"] : ["k8s", "worker"]
   vm_id           = each.value.vm_id
