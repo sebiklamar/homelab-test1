@@ -1,3 +1,11 @@
+variable "cluster" {
+  description = "talos k8s cluster configuration"
+  type = object({
+    name          = optional(string, "talos")
+    talos_version = string
+  })
+}
+
 variable "nodes" {
   description = "Configuration for cluster nodes"
   type = map(object({

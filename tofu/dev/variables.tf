@@ -1,12 +1,19 @@
 variable "proxmox" {
   type = object({
-    cluster_name = string
     endpoint     = string
     insecure     = bool
     username     = string
     api_token    = string
   })
   sensitive = true
+}
+
+variable "cluster"{
+    description ="talos k8s cluster configuration"
+    type = object({
+      name = optional(string, "talos")
+      talos_version = string
+    })
 }
 
 variable "nodes" {

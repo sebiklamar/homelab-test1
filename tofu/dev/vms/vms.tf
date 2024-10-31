@@ -20,13 +20,14 @@ resource "proxmox_virtual_environment_vm" "this" {
   keyboard_layout = "de"
 
   agent {
-    enabled = false
+    enabled = true
   }
 
   cdrom {
     enabled   = true
-    file_id   = "ISOs:iso/talos-nocloud-amd64.iso"
-      }
+    file_id   = "ISOs:iso/talos-nocloud-amd64_${var.cluster.talos_version}.iso"
+    interface = "ide3"
+  }
 
   cpu {
     cores = each.value.cpu
@@ -69,4 +70,8 @@ resource "proxmox_virtual_environment_vm" "this" {
     }
   }
 
+  # wait 3 min instead of standard 1800s/30 min
+  timeout_shutdown_vm = 200
+  # wait 3 min instead of standard 1800s/30 min
+  # timeout_start_vm    = 200
 }
