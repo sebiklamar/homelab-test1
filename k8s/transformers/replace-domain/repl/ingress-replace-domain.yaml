@@ -1,0 +1,24 @@
+- source:
+    kind: ConfigMap
+    name: cluster-param
+    fieldPath: data.DOMAIN_TLD
+  targets:
+    - select:
+        kind: Ingress
+      fieldPaths:
+        - spec.rules.0.host
+      options:
+        delimiter: "."
+        index: 2
+- source:
+    kind: ConfigMap
+    name: cluster-param
+    fieldPath: data.DOMAIN_BASE
+  targets:
+    - select:
+        kind: Ingress
+      fieldPaths:
+        - spec.rules.0.host
+      options:
+        delimiter: "."
+        index: 1
