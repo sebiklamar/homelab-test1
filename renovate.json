@@ -8,7 +8,8 @@
     "sebiklamar"
   ],
   "terragrunt": {
-    "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+    "branchPrefix": "renovate/{{packageFileDir}}-"
   },
   "kustomize": {
     "fileMatch": [
