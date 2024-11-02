@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../tofu/modules/vms"
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vms?ref=v0.0.2"
 }
 
 include "root" {
