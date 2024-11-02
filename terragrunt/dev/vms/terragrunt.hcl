@@ -1,5 +1,5 @@
 terraform {
-  source = "git::git@github.com:sebiklamar/terraform-modules-test.git//modules/vms?ref=vms-v0.0.4"
+  source = "git::git@github.com:sebiklamar/terraform-modules-test.git//modules/vms?ref=vms-v0.0.5"
 }
 
 include "root" {
