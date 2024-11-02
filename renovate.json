@@ -18,6 +18,7 @@
     {
       "customType": "regex",
       "fileMatch": [
+        "\\.hcl$",
         "\\.tf$",
         "\\.tftpl$",
         "\\.yaml$",
