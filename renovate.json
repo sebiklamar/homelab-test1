@@ -3,5 +3,7 @@
   "extends": [
     "config:recommended"
   ],
-  "assignee": "sebiklamar"
+  "assignees": [
+    "sebiklamar"
+  ]
 }
