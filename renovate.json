@@ -9,7 +9,8 @@
   ],
   "terragrunt": {
     "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
-    "branchPrefix": "renovate/{{parentDir}}-"
+    "branchPrefix": "renovate/",
+    "additionalBranchPrefix": "{{parentDir}}-"
   },
   "kustomize": {
     "fileMatch": [
