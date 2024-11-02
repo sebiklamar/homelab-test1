@@ -21,19 +21,13 @@ include "envcommon" {
 # Configure the version of the module to use in this environment. This allows you to promote new versions one
 # environment at a time (e.g., qa -> stage -> prod).
 terraform {
-  source = "${include.envcommon.locals.base_source_url}?ref=v0.0.1"  # renovate: github-releases=sebiklamar/terraform-modules
+  source = "${include.envcommon.locals.base_source_url}?ref=talos-proxmox-v0.0.1"  # renovate: github-releases=sebiklamar/terraform-modules-test
 }
 
 inputs = {
   image = {
     version = "v1.8.1"
     update_version = "v1.8.1" # renovate: github-releases=siderolabs/talos
-    schematic = file("${path.module}/talos/image/schematic.yaml")
-  }
-
-  cilium = {
-    values = file("${path.module}/../../k8s/infra/network/cilium/values.yaml")
-    install = file("${path.module}/talos/inline-manifests/cilium-install.yaml")
   }
 
   cluster = {
