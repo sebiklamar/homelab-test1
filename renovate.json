@@ -9,14 +9,13 @@
   ],
   "terragrunt": {
     "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
-    "branchPrefix": "renovate/",
+    "branchPrefix": "renovate_",
     "additionalBranchPrefix": "{{packageFileDir}}_",
     "prBodyColumns": [
       "Package",
-      "Update",
-      "Type",
-      "Change",
       "Package file",
+      "Update",
+      "Change",
       "References"
     ]
   },
