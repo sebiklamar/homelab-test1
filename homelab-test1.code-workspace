@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../vehagn-homelab.orig"
+		},
+		{
+			"path": "../vehagn-homelab"
 		}
 	]
 }
