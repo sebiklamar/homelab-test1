@@ -5,6 +5,8 @@
   ],
   "assignees": [
     "sebiklamar"
-  ]
-foo
+  ],
+  "terragrunt": {
+    "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+  }
 }
