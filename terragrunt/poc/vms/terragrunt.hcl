@@ -21,7 +21,7 @@ include "envcommon" {
 # Configure the version of the module to use in this environment. This allows you to promote new versions one
 # environment at a time (e.g., qa -> stage -> prod).
 terraform {
-  source = "${include.envcommon.locals.base_source_url}?ref=v0.0.2"  # renovate: github-releases=sebiklamar/terraform-modules
+  source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3"  # renovate: github-releases=sebiklamar/terraform-modules
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
